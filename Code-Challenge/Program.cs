@@ -9,11 +9,11 @@ namespace Code_Challenge
             var challenge = new Count_Nodes_Equal_to_Average_of_Subtree();
             var binaryTreeSample = challenge.GetSample();
 
-            challenge.PrintTree(binaryTreeSample);
+            var result = challenge.AverageOfSubtree(binaryTreeSample);
 
 
 
-            Console.WriteLine("Hello, World!");
+            Console.WriteLine($"result: {result}");
         }
     }
 }
