@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,10 +11,20 @@ namespace Code_Challenge.LeetCode
 {
     public class Count_Nodes_Equal_to_Average_of_Subtree
     {
+        private int result = 0;
         public int AverageOfSubtree(TreeNode root)
         {
 
-            return 0;
+            var rootState = CalculateState(root);
+            //var sum = (double)rootState.sum + root.val;
+            //var count = rootState.count + 1;
+            //var average = (int)Math.Floor(sum / count);
+            //if (root.val == average)
+            //{
+            //    this.result++;
+            //}
+            
+            return this.result;
         }
 
 
@@ -32,23 +45,63 @@ namespace Code_Challenge.LeetCode
             return rootNode;
         }
 
-        public void PrintTree(TreeNode rootNode)
+        public NodeState CalculateState(TreeNode rootNode)
         {
-            if (rootNode.left == null && rootNode.right == null)
+            var currentNode = rootNode;
+            if (currentNode.left == null && currentNode.right == null)
             {
-                Console.WriteLine(rootNode.val);
+                this.result++;
+               return new NodeState(1, currentNode.val);
             }
-
-            var currentNode = rootNode.right;
-            while(currentNode?.right != null)
+            else if (currentNode.left != null && currentNode.right == null)
             {
-                currentNode = currentNode.right;
+                var leftNodeState = CalculateState(currentNode.left);
+                var sum = (double)(leftNodeState.sum + currentNode.val);
+                var count = leftNodeState.count + 1;
+                var average = (int)Math.Floor(sum / count);
+                if (currentNode.val == average)
+                {
+                    this.result++;
+                }
+                return new NodeState(leftNodeState.sum + currentNode.val, leftNodeState.count + 1);
             }
-
-            Console.WriteLine(currentNode?.val);
+            else if (currentNode.left == null && currentNode.right != null)
+            {
+                var rightNodeState = CalculateState(currentNode.right);
+                var sum = (double)rightNodeState.sum + currentNode.val;
+                var count = rightNodeState.count + 1;
+                var average = (int)Math.Floor(sum / count);
+                if (currentNode.val == average)
+                {
+                    this.result++;
+                }
+                return new NodeState(rightNodeState.count + 1, rightNodeState.sum + currentNode.val);
+            }
+            else 
+            {
+                var leftNodeState = CalculateState(currentNode.left);
+                var rightNodeState = CalculateState(currentNode.right);
+                var sum = (double)(leftNodeState.sum + rightNodeState.sum + currentNode.val);
+                var count = leftNodeState.count + rightNodeState.count + 1;
+                var average = (int)Math.Floor(sum / count);
+                if (currentNode.val == average)
+                {
+                    this.result++;
+                }
+                return new NodeState(rightNodeState.count + leftNodeState.count + 1 , rightNodeState.sum + leftNodeState.sum + currentNode.val);
+            }
         }
 
-
+        public class NodeState
+        {
+            public int count;
+            public int sum;
+            public NodeState(int count, int sum)
+            {
+                this.count = count;
+                this.sum = sum;
+            }
+        }
         public class TreeNode
         {
             public int val;
