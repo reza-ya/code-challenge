@@ -1,4 +1,5 @@
 ﻿using Code_Challenge.LeetCode;
+using Code_Challenge.LeetCode.Shopping_Offers;
 
 namespace Code_Challenge
 {
@@ -6,12 +7,11 @@ namespace Code_Challenge
     {
         static void Main(string[] args)
         {
-            var challenge = new Count_Nodes_Equal_to_Average_of_Subtree();
-            var binaryTreeSample = challenge.GetSample();
-
-            var result = challenge.AverageOfSubtree(binaryTreeSample);
-
-
+            var shopingOffer = new Solution();
+            int[] price = [2, 5];
+            int[][] specials = [[3, 0, 5], [1, 2, 10]];
+            int[] needs = [3, 2];
+            var result = shopingOffer.ShoppingOffers(price, specials, needs);
 
             Console.WriteLine($"result: {result}");
         }
