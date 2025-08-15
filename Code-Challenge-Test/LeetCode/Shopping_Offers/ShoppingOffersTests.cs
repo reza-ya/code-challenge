@@ -20,7 +20,7 @@ namespace Code_Challenge_Test.LeetCode.Shopping_Offers
                     new List<int> { 1, 2, 10 }
                 },
                 new List<int> { 3, 2 },
-                12 // expected result
+                14 // expected result
             };
 
             yield return new object[]
@@ -34,6 +34,21 @@ namespace Code_Challenge_Test.LeetCode.Shopping_Offers
                 new List<int> { 1, 2, 1 },
                 11 // expected result
             };
+
+
+            //yield return new object[]
+            //{
+            //    new List<int> { 2, 3, 4 },
+            //    new List<IList<int>>
+            //    {
+            //        new List<int> { 1, 1, 0, 4 },
+            //        new List<int> { 2, 2, 1, 9 }
+            //    },
+            //    new List<int> { 0, 0, 0 },
+            //    0 // expected result
+            //};
+
+ 
         }
 
 
