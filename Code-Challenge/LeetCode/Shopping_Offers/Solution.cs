@@ -9,6 +9,7 @@ namespace Code_Challenge.LeetCode.Shopping_Offers
     public class Solution
     {
         int _globalPrice = int.MaxValue;
+        int _normalPrice = 0;
 
         public int ShoppingOffers(IList<int> price, IList<IList<int>> special, IList<int> needs)
         {
@@ -64,6 +65,11 @@ namespace Code_Challenge.LeetCode.Shopping_Offers
             }
 
 
+            for(int i = 0; i < needs.Count; i++)
+            {
+                _normalPrice += needs[i] * price[i];
+            }
+
             List<int[]> listOffers = offers.ToList();
             var offersForFirstNode = _calcNewOffersBaseOnNeed(needs, listOffers);
 
@@ -77,16 +83,6 @@ namespace Code_Challenge.LeetCode.Shopping_Offers
             while (stack.Count != 0)
             {
                 var currentNode = stack.Pop();
-                //Console.WriteLine($"stack.Count: {stack.Count()}");
-                //Console.WriteLine($"currentNode.Needs: {currentNode.NeedsKey}");
-                //Console.WriteLine($"currentNode.Price: {currentNode.Price}");
-                //for(int i = 0; i < currentNode.Offers.Count; i++)
-                //{
-                //    Console.WriteLine($"currentNode.Offers:");
-                //    Console.WriteLine($"offers[{i}]: {string.Join(',', currentNode.Offers[i])}");
-                //}
-                //Console.WriteLine();
-                //Console.WriteLine();
                 for (int i = 0; i < currentNode.Offers.Count; i++)
                 {
                     var newNode = _purchase(currentNode.Needs, currentNode.Offers, i, currentNode.Price);
@@ -99,17 +95,24 @@ namespace Code_Challenge.LeetCode.Shopping_Offers
                         continue;
                     }
 
-                    if (!visited.Add($"{newNode.NeedsKey}:{newNode.Price}"))
+                    var v = visited.FirstOrDefault(newNode.NeedsKey);
+                    if (!visited.Add($"{newNode.NeedsKey}"))
                     {
                         continue;
                     }
+
+                    if (newNode.Price > _normalPrice)
+                    {
+                        continue;
+                    }
+
 
                     stack.Push(newNode);
                 }
             }
 
 
-            return _globalPrice;
+            return Math.Min(_globalPrice , _normalPrice);
         }
 
         private Node _purchase(IList<int> needs, List<int[]> offers, int purchaseIndex, int currentPurchasePrice)
