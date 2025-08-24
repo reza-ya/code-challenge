@@ -1,15 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Code_Challenge.LeetCode
+namespace Code_Challenge.LeetCode._2265_Count_Nodes_Equal_to_Average_of_Subtree
 {
-    public class Count_Nodes_Equal_to_Average_of_Subtree
+
+    /*
+    Difficulty: Medium
+
+    Given the root of a binary tree, return the number of nodes where the value of the node is equal to the average of the values in its subtree.
+
+    Note:
+    The average of n elements is the sum of the n elements divided by n and rounded down to the nearest integer.
+    A subtree of root is a tree consisting of root and all of its descendants. 
+
+    Constraints:
+    The number of nodes in the tree is in the range [1, 1000].
+    0 <= Node.val <= 1000
+    */
+    class Solution
     {
         private int result = 0;
         public int AverageOfSubtree(TreeNode root)
@@ -24,7 +35,7 @@ namespace Code_Challenge.LeetCode
             if (currentNode.left == null && currentNode.right == null)
             {
                 this.result++;
-               return new NodeState(1, currentNode.val);
+                return new NodeState(1, currentNode.val);
             }
             else if (currentNode.left != null && currentNode.right == null)
             {
@@ -50,7 +61,7 @@ namespace Code_Challenge.LeetCode
                 }
                 return new NodeState(rightNodeState.count + 1, rightNodeState.sum + currentNode.val);
             }
-            else 
+            else
             {
                 var leftNodeState = CalculateState(currentNode.left);
                 var rightNodeState = CalculateState(currentNode.right);
@@ -61,7 +72,7 @@ namespace Code_Challenge.LeetCode
                 {
                     this.result++;
                 }
-                return new NodeState(rightNodeState.count + leftNodeState.count + 1 , rightNodeState.sum + leftNodeState.sum + currentNode.val);
+                return new NodeState(rightNodeState.count + leftNodeState.count + 1, rightNodeState.sum + leftNodeState.sum + currentNode.val);
             }
         }
 

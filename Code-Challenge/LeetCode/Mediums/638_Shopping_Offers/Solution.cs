@@ -4,8 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Code_Challenge.LeetCode.Shopping_Offers
+namespace Code_Challenge.LeetCode.Mediums.Shopping_Offers
 {
+    /*
+    In LeetCode Store, there are n items to sell. 
+    Each item has a price. However, there are some special offers,
+    and a special offer consists of one or more different kinds of items with a sale price.
+
+    You are given an integer array price where price[i] is the price of the ith item,
+    and an integer array needs where needs[i] is the number of pieces of the ith item you want to buy.
+
+    You are also given an array special where special[i] is of size n + 1 where special[i][j] is the number of pieces of the jth item in the ith offer and special[i][n] (i.e., the last integer in the array) is the price of the ith offer.
+
+    Return the lowest price you have to pay for exactly certain items as given, 
+    where you could make optimal use of the special offers. 
+    You are not allowed to buy more items than you want, 
+    even if that would lower the overall price. 
+    You could use any of the special offers as many times as you want.
+    */
     public class Solution
     {
         int _globalPrice = int.MaxValue;
@@ -174,152 +190,4 @@ namespace Code_Challenge.LeetCode.Shopping_Offers
         }
 
     }
-
-
-
-    //public class Solution
-    //{
-
-    //    public int ShoppingOffers(IList<int> price, IList<IList<int>> special, IList<int> needs)
-    //    {
-
-    //        if (price.All(price => price == 0))
-    //        {
-    //            return 0;
-    //        }
-
-    //        int overAllPurchasePrice = 0;
-    //        int n = price.Count - 1;
-    //        int offerPrice = n + 1;
-    //        int profit = n + 2;
-    //        int maxPurchase = n + 3;
-    //        int offerColumnCount = special[0].Count + 2;
-    //        int[][] offers = new int[special.Count + price.Count][];
-    //        for (int i = 0; i < special.Count + price.Count; i++)
-    //        {
-    //            offers[i] = new int[offerColumnCount];
-    //        }
-
-    //        // add special-offers to the offers 
-    //        for (int i = 0; i < special.Count; i++)
-    //        {
-    //            int normalPurchase = 0;
-    //            // add each row to the offers
-    //            for (int j = 0; j < special[i].Count - 1; j++)
-    //            {
-    //                normalPurchase += special[i][j] * price[j];
-    //                offers[i][j] = special[i][j];
-
-    //            }
-    //            offers[i][offerPrice] = special[i][offerPrice];
-    //            offers[i][profit] = normalPurchase - special[i][offerPrice];
-    //            offers[i][maxPurchase] = 0;
-    //        }
-    //        // add normal price to the offers to make it general
-    //        for (int i = 0; i < price.Count; i++)
-    //        {
-    //            for (int j = 0; j < price.Count; j++)
-    //            {
-    //                if (i == j)
-    //                {
-    //                    offers[special.Count + i][j] = 1;
-    //                }
-    //                else
-    //                {
-    //                    offers[special.Count + i][j] = 0;
-    //                }
-    //            }
-
-    //            offers[special.Count + i][offerPrice] = price[i];
-    //            offers[special.Count + i][profit] = 0;
-    //            offers[special.Count + i][maxPurchase] = 0;
-    //        }
-
-    //        bool needsRemain = true;
-    //        while (needsRemain)
-    //        {
-    //            int maxPurchaseProfit = int.MinValue;
-    //            int purchaseIndexOffer = -1;
-    //            // calculate max purchase per row
-    //            for (int i = 0; i < offers.Length; i++)
-    //            {
-    //                offers[i][maxPurchase] = _calMaxPurchase(offers[i], needs);
-    //                int offerMaxProfit = offers[i][maxPurchase] * offers[i][profit];
-    //                if (offerMaxProfit > maxPurchaseProfit && offerMaxProfit > 0)
-    //                {
-    //                    purchaseIndexOffer = i;
-    //                    maxPurchaseProfit = offerMaxProfit;
-    //                }
-    //            }
-
-    //            if (purchaseIndexOffer == -1)
-    //            {
-    //                for (int i = 0; i < offers.Length; i++)
-    //                {
-    //                    if (offers[i][maxPurchase] != 0)
-    //                    {
-    //                        purchaseIndexOffer = i;
-    //                        break;
-    //                    }
-    //                }
-    //            }
-
-    //            if (purchaseIndexOffer == -1)
-    //            {
-    //                break;
-    //            }
-    //            overAllPurchasePrice += _purchase(offers[purchaseIndexOffer], needs);
-
-
-    //            needsRemain = needs.Any(x => x != 0);
-    //        }
-    //        return overAllPurchasePrice;
-    //    }
-
-
-
-    //    private int _calMaxPurchase(int[] offer, IList<int> needs)
-    //    {
-
-    //        int[] accumulateOffer = new int[offer.Length];
-    //        for (int i = 0; i < offer.Length; i++)
-    //        {
-    //            accumulateOffer[i] = offer[i];
-    //        }
-
-
-    //        bool canPurchaseMore = true;
-    //        int purchaseCount = 0;
-
-    //        while (canPurchaseMore)
-    //        {
-    //            for (int i = 0; i < needs.Count; i++)
-    //            {
-    //                if (accumulateOffer[i] > needs[i])
-    //                {
-    //                    canPurchaseMore = false;
-    //                    break;
-    //                }
-    //            }
-    //            if (canPurchaseMore == false) break;
-    //            purchaseCount++;
-
-    //            for (int i = 0; i < needs.Count; i++)
-    //            {
-    //                accumulateOffer[i] += offer[i];
-    //            }
-    //        }
-
-    //        return purchaseCount;
-    //    }
-
-    //    private int _purchase(int[] offer, IList<int> needs)
-    //    {
-    //        for (int i = 0; i < needs.Count; i++)
-    //        {
-    //            needs[i] = needs[i] - offer[i];
-    //        }
-    //        return offer[needs.Count];
-    //    }
-    //}
 }

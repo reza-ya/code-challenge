@@ -10,11 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
+    <Compile Remove="LeetCode\NewFolder\**" />
+    <EmbeddedResource Remove="LeetCode\NewFolder\**" />
+    <None Remove="LeetCode\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="LeetCode\NewFolder\" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.22.1" />
   </ItemGroup>
 
 </Project>
