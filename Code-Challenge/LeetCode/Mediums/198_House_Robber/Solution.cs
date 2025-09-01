@@ -12,12 +12,12 @@ namespace Code_Challenge.LeetCode.Mediums._198_House_Robber
         public int[]? houseMaxRob;
         public int Rob(int[] nums)
         {
+            if (nums.Length == 1) return nums[0];
             houseMaxRob = new int[nums.Length];
             for (int i = 0; i < houseMaxRob.Length; i++)
             {
                 houseMaxRob[i] = -1;
             }
-            if (nums.Length == 1) return nums[0];
             int robStartAtOne = DFSRob(ref nums, 0, nums[0]);
             int robStartAtTwo = DFSRob(ref nums, 1, nums[1]);
 
