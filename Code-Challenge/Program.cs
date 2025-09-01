@@ -1,5 +1,5 @@
 ﻿using Code_Challenge.LeetCode;
-using Code_Challenge.LeetCode.Mediums._198_House_Robber;
+using Code_Challenge.LeetCode.Mediums._3348_Smallest_Divisible_Digit_Product_II;
 
 using System.Collections;
 
@@ -13,10 +13,8 @@ namespace Code_Challenge
 
             var solution = new Solution();
 
-            //var houses = new int[] { 1, 2, 3, 1 };
-            var houses = new int[] { 0, 0, 0, 1 };
-
-            var result = solution.Rob(houses);
+            
+            var result = solution.SmallestNumber("1234", 256);
 
             Console.WriteLine($"result: {result}");
         }
