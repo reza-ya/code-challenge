@@ -1,5 +1,5 @@
 ﻿using Code_Challenge.LeetCode;
-using Code_Challenge.LeetCode.Mediums._3348_Smallest_Divisible_Digit_Product_II;
+using Code_Challenge.LeetCode.Mediums._227_Basic_Calculator_II;
 
 using System.Collections;
 
@@ -13,8 +13,8 @@ namespace Code_Challenge
 
             var solution = new Solution();
 
-            
-            var result = solution.SmallestNumber("1234", 256);
+            var str = "3+2*2";
+            var result = solution.Calculate(str);
 
             Console.WriteLine($"result: {result}");
         }
