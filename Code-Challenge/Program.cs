@@ -1,6 +1,5 @@
 ﻿using Code_Challenge.LeetCode;
-using Code_Challenge.LeetCode.Mediums._227_Basic_Calculator_II;
-
+using Code_Challenge.LeetCode.Mediums._1884_Egg_Drop_With_2_Eggs_and_N_Floors;
 using System.Collections;
 
 namespace Code_Challenge
@@ -9,14 +8,12 @@ namespace Code_Challenge
     {
         static void Main(string[] args)
         {
-
-
             var solution = new Solution();
 
-            var str = "3+2*2";
-            var result = solution.Calculate(str);
 
-            Console.WriteLine($"result: {result}");
+            var result = solution.TwoEggDrop(10);
+
+            Console.WriteLine(result);
         }
     }
 }
