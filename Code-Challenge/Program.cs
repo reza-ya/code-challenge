@@ -9,9 +9,10 @@ namespace Code_Challenge
     {
         static void Main(string[] args)
         {
-
-
             var solution = new Solution();
+
+
+            var result = solution.TwoEggDrop(10);
 
             var result = solution.CountCommas(100000);
 
